@@ -29,7 +29,10 @@ function App() {
       <div className="max-w-4xl mx-auto bg-white shadow-md rounded-lg p-6">
         <div className="flex flex-col gap-4 mb-6">
           <div className="flex justify-between items-center">
-            <h1 className="text-2xl font-semibold">Chart Playground</h1>
+            <div className="flex flex-col gap-1 text-[13px]">
+              <h1 className="text-2xl font-semibold">Chart Playground</h1>
+              <p className="text-gray-400">Please read the Readme file</p>
+            </div>
             <select
               className="border px-3 py-1 rounded-md"
               value={type}

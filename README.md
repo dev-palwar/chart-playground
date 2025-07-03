@@ -1,69 +1,60 @@
-# React + TypeScript + Vite
+# 🧠 Renderer Playground
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a dynamic React-based playground for rendering charts (bar, line, pie) based on structured JSON data. It allows you to interactively visualize data like financial reports using Chart.js with a clean and customizable interface.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- ✅ Supports Bar, Line, and Pie charts
+- ✅ Switch chart types dynamically
+- ✅ Toggle between multiple datasets (e.g., HDFC, SBI, ICICI)
+- ✅ Paste or type raw chart JSON input
+- ✅ Chart metadata is TypeScript-safe
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## TypeScript type
+You can just ask chatgpt to generate datasets according to this interface.
+```
+export interface ChartMetadata {
+  id: string;
+  type: "bar" | "line" | "pie";
+  title?: string;
+  labels: string[];
+  datasets: {
+    label: string;
+    data: number[];
+    backgroundColor?: string[];
+    borderColor?: string[];
+    borderWidth?: number;
+  }[];
+}
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 📊 Example Chart Metadata
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
+```json
+{
+  "id": "bar_monthly_revenue_comparison",
+  "type": "bar",
+  "title": "Monthly Revenue Comparison - FY 2024–25 [in ₹ Crores]",
+  "labels": ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+  "datasets": [
+    {
+      "label": "HDFC Bank",
+      "data": [134.2, 140.3, 145.7, 152.1, 148.5, 150.0, 155.3, 158.9, 162.0],
+      "backgroundColor": "rgba(54, 162, 235, 0.6)",
+      "borderColor": "rgba(54, 162, 235, 1)",
+      "borderWidth": 1.5
     },
-  },
-])
+    {
+      "label": "ICICI Bank",
+      "data": [128.7, 133.1, 137.9, 142.3, 139.0, 141.4, 144.8, 147.2, 150.9],
+      "backgroundColor": "rgba(255, 159, 64, 0.6)",
+      "borderColor": "rgba(255, 159, 64, 1)",
+      "borderWidth": 1.5
+    }
+  ]
+}
 ```

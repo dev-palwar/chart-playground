@@ -45,7 +45,7 @@ function App() {
           <textarea
             className="w-full border rounded-md p-3 font-mono text-sm min-h-[200px]"
             placeholder="Paste ChartMetadata JSON here"
-            value={input}
+            value={input || JSON.stringify(chartData, null, 2)}
             onChange={(e) => setInput(e.target.value)}
           />
           <button
